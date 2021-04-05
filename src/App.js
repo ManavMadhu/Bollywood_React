@@ -2,7 +2,10 @@ import React, { Component } from "react";
 import "./styles.css";
 import { stockData } from "./Components/MovieDatabase";
 import { consonants } from "./Components/consonants";
-//program for if button already pressed
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Jumbotron, Button, Container } from "reactstrap";
+import TypeWriterEffect from "react-typewriter-effect";
+
 class App extends Component {
   state = {
     movieName: null,
@@ -61,7 +64,9 @@ class App extends Component {
   handleClickChar = (clickedChar) => {
     clickedChar = clickedChar.keyboard;
     console.log(clickedChar);
-
+    if (this.state.movieComplete) {
+      return;
+    }
     if (this.state.pressed.includes(clickedChar)) {
       this.setState({ alreadyPressed: "Button already Pressed" });
       return;
@@ -126,22 +131,49 @@ class App extends Component {
     if (this.state.hidden) {
       return (
         <div>
-          <div className="PlayButtonScreen">
-            <button onClick={this.handleGameStart}>play</button>
-          </div>
+          <Jumbotron>
+            <h1 className="display-3">BOLLYWOOD!</h1>
+            {/* *************typewriter****************** */}
+            <TypeWriterEffect
+              textStyle={{
+                fontFamily: "Work Sans",
+                color: "#3F3D56",
+                fontWeight: 500,
+                fontSize: "1.5em"
+              }}
+              startDelay={1000}
+              cursorColor="#3F3D56"
+              multiText={[
+                "This is a web version of the simple fill-in-the-blanks game that everyone used to play in the back of their school notebooks."
+              ]}
+              multiTextDelay={1000}
+              typeSpeed={50}
+            />
+            {/* ****************typewriter Ends**************** */}
+            <hr className="my-2" />
+            <p>This is made almost entirely with REACT JS</p>
+            <p className="lead">
+              <Button color="primary" onClick={this.handleGameStart}>
+                Play
+              </Button>
+            </p>
+          </Jumbotron>
         </div>
       );
     }
     if (this.state.gameOver) {
       return (
-        <div className="EndScreen">
-          <div>Game Over</div>
-          <div>The film was- {this.state.movieName}</div>
-          <div>
-            <div className="PlayButtonScreen">
-              <button onClick={this.handleGameStart}>play</button>
-            </div>
-          </div>
+        <div>
+          <Jumbotron>
+            <h1 className="display-3">Game Over</h1>
+            <hr className="my-2" />
+            <p>The film was- {this.state.movieName}</p>
+            <p className="lead">
+              <Button color="primary" onClick={this.handleGameStart}>
+                Play Again
+              </Button>
+            </p>
+          </Jumbotron>
         </div>
       );
     }
@@ -150,17 +182,33 @@ class App extends Component {
         <div>
           <div>Lives:{this.state.lives}</div>
           <div>{this.state.visibleName}</div>
-          <div>
-            {consonants.map((keyboard, i) => (
-              <button onClick={() => this.handleClickChar({ keyboard })}>
-                {keyboard}
-              </button>
-            ))}
+          <div className="buttonSet">
+            {consonants.map((keyboard, i) =>
+              this.state.pressed.includes(keyboard) ? (
+                <Button
+                  className="alphabetButton"
+                  color="danger"
+                  onClick={() => this.handleClickChar({ keyboard })}
+                >
+                  {keyboard}
+                </Button>
+              ) : (
+                <Button
+                  className="alphabetButton"
+                  color="primary"
+                  onClick={() => this.handleClickChar({ keyboard })}
+                >
+                  {keyboard}
+                </Button>
+              )
+            )}
           </div>
           <div className="ErrorMessage">{this.state.alreadyPressed}</div>
           <div>
             {this.state.movieComplete ? (
-              <button onClick={() => this.handleNextMovie()}>next movie</button>
+              <Button color="success" onClick={() => this.handleNextMovie()}>
+                Next Movie
+              </Button>
             ) : (
               <div></div>
             )}
