@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./styles.css";
 import { stockData } from "./Components/MovieDatabase";
-import { consonants } from "./Components/consonants";
+import { consonants , bollywoodHeader} from "./Components/consonants";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Jumbotron, Button, Container } from "reactstrap";
 import TypeWriterEffect from "react-typewriter-effect";
@@ -180,8 +180,18 @@ class App extends Component {
     return (
       <div className="PlayScreen">
         <div>
-          <div>Lives:{this.state.lives}</div>
-          <div>{this.state.visibleName}</div>
+          {/* <div className="bollywoodHeader"><h1>
+            BOLLYWOOD:{this.state.lives}
+            </h1></div> */}
+            <thead className="bollywoodHeader">{bollywoodHeader.map((keyboard, i) =>
+              (
+                <th className="bollywoodLetter">
+                  {keyboard}
+                </th>
+              )
+            )}</thead>
+            <hr/>
+          <h2 className="guessName">{this.state.visibleName}</h2>
           <div className="buttonSet">
             {consonants.map((keyboard, i) =>
               this.state.pressed.includes(keyboard) ? (
@@ -196,6 +206,7 @@ class App extends Component {
                 <Button
                   className="alphabetButton"
                   color="primary"
+                  size="lg"
                   onClick={() => this.handleClickChar({ keyboard })}
                 >
                   {keyboard}

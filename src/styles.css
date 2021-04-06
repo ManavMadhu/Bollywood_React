@@ -29,3 +29,30 @@
 .alphabetButton {
   margin: 5px;
 }
+
+.buttonSet{
+  margin-top: 25%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 15%;
+}
+
+.bollywoodHeader{
+  margin-right:auto;
+  margin-left: auto;
+  display: block;
+  text-align: center;
+}
+
+.bollywoodLetter{
+  text-align: center;
+  font-size: 50px;
+  font-weight: 100;
+  letter-spacing: 4px;
+}
+
+.guessName{
+  float:none;
+  margin:auto;
+  letter-spacing: 5px;
+}

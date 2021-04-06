@@ -21,3 +21,15 @@ export const consonants = [
   "Y",
   "Z"
 ];
+
+export const bollywoodHeader = [
+  "B",
+  "O",
+  "L",
+  "L",
+  "Y",
+  "W",
+  "O",
+  "O",
+  "D"
+]
